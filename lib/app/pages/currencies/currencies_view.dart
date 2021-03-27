@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:foxbit_client/app/utils/formatters/money_formatter.dart';
 import 'package:foxbit_client/app/utils/metrics/app_metrics.dart';
 import 'package:foxbit_client/app/widgets/app_circular_indicator.dart';
 import 'package:foxbit_client/app/widgets/currency_item.dart';
@@ -37,7 +38,7 @@ class CurrenciesPageState extends ViewState<CurrenciesPage, CurrenciesController
                         CurrencyItem(
                           currencyName: currency.name ?? currency.productSymbol,
                           tickerSymbol: currency.productSymbol,
-                          price: currency.quote.lastTradedPx.toString(),
+                          price: formatBRLMoneyValue(currency.quote.lastTradedPx),
                           variation: currency.quote.rolling24HrPxChange,
                           imageAsset: 'assets/images/${currency.instrumentId}.png',
                         ),

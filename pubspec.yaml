@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   flutter_clean_architecture: ^5.0.0
+  flutter_money_formatter: ^0.8.3
   rxdart: ^0.26.0
   websok: ^2.1.2
 
