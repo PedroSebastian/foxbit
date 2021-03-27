@@ -6,4 +6,8 @@ class AppMetrics {
   static double getDefaultSpacing() {
     return _defaultSpacing;
   }
+
+  static double getDefaultSpacingWithMultiplier(double multiplier) {
+    return _defaultSpacing * multiplier;
+  }
 }

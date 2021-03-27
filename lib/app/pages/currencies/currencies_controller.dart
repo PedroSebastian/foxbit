@@ -15,10 +15,20 @@ class CurrenciesController extends Controller {
   bool hasError = false;
 
   CurrenciesController() : webSocket = FoxbitWebSocket() {
+    init();
+  }
+
+  void init() {
     isLoading = true;
     webSocket.connect();
     presenter.sendHeartbeat(webSocket);
     presenter.getCurrencies();
+  }
+
+  void retry() {
+    hasError = false;
+    init();
+    refreshUI();
   }
 
   @override
@@ -37,6 +47,10 @@ class CurrenciesController extends Controller {
     presenter.onCurrenciesComplete = onCurrenciesComplete;
     presenter.onNextCurrencies = onNextCurrencies;
     presenter.onCurrenciesError = onCurrenciesError;
+
+    webSocket.streamController.onAddError((error) {
+
+    });
   }
 
   void heartbeatOnComplete() {
@@ -69,9 +83,13 @@ class CurrenciesController extends Controller {
   }
 
   void onCurrenciesError(dynamic error) {
-    hasError = true;
+    if (!hasError) {
+      hasError = true;
+      showSnackbarMessage('Oops! Tivemos um erro ao carregar as cotações. Tente em alguns instantes.');
+    }
+
     isLoading = false;
-    showSnackbarMessage('Oops! Tivemos um erro ao carregar as cotações. Tente em alguns instantes.');
+    refreshUI();
   }
 
   void onNextCurrencies(List<Currency> currencies) {

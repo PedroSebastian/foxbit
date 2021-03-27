@@ -58,7 +58,7 @@ class CurrencyItem extends StatelessWidget {
                       fontSize: 14)),
               Text(price,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 18)),
+                      fontWeight: FontWeight.w700, fontSize: 16)),
             ],
           )),
     );

@@ -14,7 +14,6 @@ class FoxbitWebSocket {
 
   final int _idStepSize = 2;
 
-  @protected
   final BehaviorSubject<Map> streamController = BehaviorSubject<Map>();
 
   int get lastId => _id - _idStepSize;
@@ -24,14 +23,18 @@ class FoxbitWebSocket {
   }
   
   void connect() {
-    _socket.connect();
-    _socket.listen(
-      onData: onMessage,
-      onDone: _onDone,
-      cancelOnError: false
-    );
-    _connectedByUser = true;
-    _id = 0;
+    try {
+      _socket.connect();
+      _socket.listen(
+          onData: onMessage,
+          onDone: _onDone,
+          cancelOnError: false
+      );
+      _connectedByUser = true;
+      _id = 0;
+    } catch (exception) {
+      streamController.addError(exception);
+    }
   }
 
   Future<void> disconnect() async {
@@ -68,7 +71,7 @@ class FoxbitWebSocket {
     if (data['o'].toString().isNotEmpty) {
       data['o'] = json.decode(data['o'].toString());
     }
-    
+
     streamController.add(data);
   }
 
