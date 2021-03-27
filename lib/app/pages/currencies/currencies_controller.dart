@@ -25,6 +25,7 @@ class CurrenciesController extends Controller {
     final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       noConnectionError = true;
+      isLoading = false;
       refreshUI();
       showSnackbarMessage('Oops! Verifique sua conexão e tente novamente.');
     } else if (connectivityResult == ConnectivityResult.wifi) {

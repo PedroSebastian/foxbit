@@ -35,7 +35,13 @@ class CurrenciesPageState
             }
 
             if (controller.hasError) {
-              return buildErrorSection(controller);
+              return buildErrorSection(controller, Icons.error,
+                  'Oops, erro ao \ncarregar as cotações.');
+            }
+
+            if (controller.noConnectionError) {
+              return buildErrorSection(controller, Icons.signal_wifi_off_outlined,
+                  'Oops, não conseguimos nos conectar.');
             }
 
             return ListView(
@@ -61,16 +67,19 @@ class CurrenciesPageState
         ),
       );
 
-  Center buildErrorSection(CurrenciesController controller) {
+  Center buildErrorSection(CurrenciesController controller, IconData icon, String message) {
     return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error, size: 35, color: FoxBitColors.blackColor),
+                  Icon(icon, size: 35, color: FoxBitColors.blackColor),
                   SizedBox(height: AppMetrics.getDefaultSpacingWithMultiplier(3)),
-                  const Text('Oops, erro ao \ncarregar as cotações.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300)),
+                  Padding(
+                    padding: EdgeInsets.all(AppMetrics.getDefaultSpacingWithMultiplier(1.5)),
+                    child: Text(message,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w300)),
+                  ),
                   SizedBox(height: AppMetrics.getDefaultSpacing()),
                   CupertinoButton(
                       onPressed: controller.retry,
