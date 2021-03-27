@@ -1,0 +1,9 @@
+import 'package:flutter/material.dart';
+
+import 'app/application.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  runApp(FoxbitApp());
+}

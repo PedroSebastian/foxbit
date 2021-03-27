@@ -1,0 +1,27 @@
+name: foxbit_client
+description: A new super Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_clean_architecture: ^5.0.0
+  rxdart: ^0.26.0
+  websok: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  lint: ^1.5.3
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
