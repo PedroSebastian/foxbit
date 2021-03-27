@@ -10,8 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  animate_do: ^2.0.0
+  connectivity: ^3.0.3
   flutter_clean_architecture: ^5.0.0
   flutter_money_formatter: ^0.8.3
+  flutter_svg: ^0.19.3
   rxdart: ^0.26.0
   websok: ^2.1.2
 

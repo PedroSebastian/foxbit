@@ -10,9 +10,14 @@ class FoxbitApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: FoxBitColors.primaryColor
+        primaryColor: FoxBitColors.primaryColor,
+        pageTransitionsTheme: const PageTransitionsTheme(builders: {
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder()
+        }),
       ),
       routes: appRoutes,
+      initialRoute: RouteNames.initialPage,
     );
   }
 }

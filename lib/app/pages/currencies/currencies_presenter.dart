@@ -57,9 +57,9 @@ class _HeartBeatObserver implements Observer<void> {
   }
 
   @override
-  void onError(dynamic e) {
+  void onError(dynamic error) {
     assert(presenter.heartbeatOnError != null);
-    presenter.heartbeatOnError(e);
+    presenter.heartbeatOnError(error);
   }
 }
 

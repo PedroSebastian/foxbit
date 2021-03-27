@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:foxbit_client/app/pages/currencies/currencies_presenter.dart';
 import 'package:foxbit_client/data/helpers/websocket.dart';
 import 'package:foxbit_client/domain/entities/currency.dart';
-
-import 'currencies_presenter.dart';
 
 class CurrenciesController extends Controller {
   CurrenciesPresenter presenter;
@@ -13,16 +13,25 @@ class CurrenciesController extends Controller {
   List<Currency> currencies = [];
   bool isLoading = false;
   bool hasError = false;
+  bool noConnectionError = false;
 
   CurrenciesController() : webSocket = FoxbitWebSocket() {
     init();
   }
 
-  void init() {
+  Future<void> init() async {
     isLoading = true;
-    webSocket.connect();
-    presenter.sendHeartbeat(webSocket);
-    presenter.getCurrencies();
+    noConnectionError = false;
+    final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      noConnectionError = true;
+      refreshUI();
+      showSnackbarMessage('Oops! Verifique sua conexão e tente novamente.');
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      webSocket.connect();
+      presenter.sendHeartbeat(webSocket);
+      presenter.getCurrencies();
+    }
   }
 
   void retry() {
@@ -47,10 +56,6 @@ class CurrenciesController extends Controller {
     presenter.onCurrenciesComplete = onCurrenciesComplete;
     presenter.onNextCurrencies = onNextCurrencies;
     presenter.onCurrenciesError = onCurrenciesError;
-
-    webSocket.streamController.onAddError((error) {
-
-    });
   }
 
   void heartbeatOnComplete() {
