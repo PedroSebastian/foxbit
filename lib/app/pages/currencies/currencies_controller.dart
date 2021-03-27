@@ -85,6 +85,8 @@ class CurrenciesController extends Controller {
   void onCurrenciesComplete() {
     isLoading = false;
     refreshUI();
+
+    _scheduleCurrenciesUpdate();
   }
 
   void onCurrenciesError(dynamic error) {
@@ -98,6 +100,18 @@ class CurrenciesController extends Controller {
   }
 
   void onNextCurrencies(List<Currency> currencies) {
+    this.currencies.clear();
     this.currencies.addAll(currencies);
+  }
+
+  void _scheduleCurrenciesUpdate() {
+    Timer(const Duration(seconds: 5), () async {
+      final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult == ConnectivityResult.none) {
+        return;
+      }
+
+      presenter.getCurrencies();
+    });
   }
 }

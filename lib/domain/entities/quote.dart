@@ -10,8 +10,8 @@ class Quote {
       lastTradedPx: map['LastTradedPx'] != null
           ? double.parse(map['LastTradedPx'].toString())
           : null,
-      rolling24HrVolume: map['Rolling24HrVolume'] as double,
-      rolling24HrPxChange: map['Rolling24HrPxChange'] as double,
+      rolling24HrVolume: double.parse(map['Rolling24HrVolume'].toString()),
+      rolling24HrPxChange: double.parse(map['Rolling24HrPxChange'].toString()),
     );
   }
 
