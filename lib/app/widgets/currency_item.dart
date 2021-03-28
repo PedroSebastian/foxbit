@@ -50,9 +50,9 @@ class CurrencyItem extends StatelessWidget {
                   )
                 ],
               ),
-              Text(variation.toString(),
+              Text(isVariationNegative() ? variation.toString() : '+${variation.toString()}',
                   style: TextStyle(
-                      color: variation < 0
+                      color: isVariationNegative()
                           ? FoxBitColors.redColor
                           : FoxBitColors.greenColor,
                       fontSize: 14)),
@@ -63,4 +63,6 @@ class CurrencyItem extends StatelessWidget {
           )),
     );
   }
+
+  bool isVariationNegative() => variation < 0;
 }
