@@ -8,7 +8,7 @@ String formatBRLMoneyValue(double value) {
           thousandSeparator: '.',
           decimalSeparator: ',',
           symbolAndNumberSeparator: ' ',
-          fractionDigits: 3));
+          fractionDigits: 2));
 
   return moneyFormatter.output.symbolOnLeft;
 }
