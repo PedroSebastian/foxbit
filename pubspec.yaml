@@ -7,11 +7,10 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-
   animate_do: ^2.0.0
   connectivity: ^3.0.3
+  flutter:
+    sdk: flutter
   flutter_clean_architecture: ^5.0.0
   flutter_money_formatter: ^0.8.3
   flutter_svg: ^0.19.3

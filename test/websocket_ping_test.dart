@@ -23,7 +23,7 @@ void main() {
   test('Validate correct execution', () async {
     useCase.execute(observer, webSocket);
     while (!observer.ended) {
-      await Future<dynamic>.delayed(const Duration(milliseconds: 10));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 5));
     }
 
     expect(observer.done, true);
